@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel = "stylesheet" href = "fleet.css">
+    <title>Our Fleet | AZoom Car Rentals</title>
+  </head>
+
+  <body>
+    <ul class="navbar">
+      <li><a href = "home.html">Home</a></li>
+      <li><a class = "active" href = "fleet.html">Fleet</a></li>
+      <li><a href = "contact.html">Contact</a></li>
+      <li><a href = "about.html">About</a></li>
+      <li><a style = "display: none;" href = "booking.html">Make a Booking</a></li>
+      <li><a style = "display: none;" href = "history.html">Booking History</a></li>
+      <li><a style = "display: none;" href = "records.html">Booking Records</a></li>
+      <li class = "right"><a id = "loginLink" href = "login.html">Login</a></li>
+      <li class = "right"><a id = "logoutButton" style = "display: none;" href = "#" onclick = "confirmLogout ();">Logout</a></li>
+      <li class = "right"><a id = "welcomeMessage" style = "display: none;"></a></li>
+    </ul>
+
+    <div class = "companyLogo">
+        <img src = "img/logo.png" height = "100px" style = "float: left;">
+    <h1 style = "text-align: center;">Our Fleet</h1>
+    </div>
+
+    <div class = "fleetOfCars">
+      <p style = "text-align: left;">Scroll through our fleet to find your vehicle to suit your rental needs!</p>  
+        <h3>Standard Sedans</h3>
+        <p style = "text-align: left; font-size: 15px;">Our Standard Sedans offer a perfect blend of affordability and comfort. Ideal for daily commutes or leisurely drives, these vehicles provide ample seating space, good fuel efficiency, and modern amenities for a hassle-free travel experience.</p>
+        <div class = "fleet-cars">
+          <img class = "car" id = "camry" src = "img/car/camry.png" alt = "Toyota Camry" data-popup = "car-popup-camry" onclick = "showCarPopup (event)">
+          <img class = "car" id = "civic" src = "img/car/civic.png" alt = "Honda Civic" data-popup = "car-popup-civic" onclick = "showCarPopup (event)">
+          <img class = "car" id = "lancer" src = "img/car/lancer.png" alt = "Mitsubishi Lancer" data-popup = "car-popup-lancer" onclick = "showCarPopup (event)">
+          <img class = "car" id = "prius" src = "img/car/prius.png" alt = "Toyota Prius" data-popup = "car-popup-prius" onclick = "showCarPopup (event)">
+        </div>
+
+        <div id = "car-popup-camry" class = "car-popup">
+          <h1>2010 Toyota Camry</h1>
+          <ul style = "background-color: white;">
+            <li>Doors: 4</li>
+            <li>Seating Capacity: 5</li>
+            <li>Two Large Bags + Two Small Bags</li>
+            <li>Efficiency: 25-31 MPGe</li>
+            <li>Daily rate: $39/day</li>
+            <li>Weekly rate: $249/week</li>
+            <li>Monthly rate: $699/month</li>
+          </ul>
+          <span class = "close-popup" onclick = "closeCarPopup (event)">Close</span>
+        </div>
+
+        <div id = "car-popup-civic" class = "car-popup">
+          <h1>2018 Honda Civic</h1>
+          <ul style = "background-color: white;">
+            <li>Doors: 4</li>
+            <li>Seating Capacity: 5</li>   
+            <li>One Large Bag + Two Small Bags</li>
+            <li>Efficiency: 28-40 MPGe</li>
+            <li>Daily rate: $49/day</li>
+            <li>Weekly rate: $299/week</li>
+            <li>Monthly rate: $799/month</li>
+          </ul>
+          <span class = "close-popup" onclick = "closeCarPopup (event)">Close</span>
+        </div>
+
+        <div id = "car-popup-lancer" class = "car-popup">
+          <h1>2009 Mitsubishi Lancer</h1>
+          <ul style = "background-color: white;">
+            <li>Doors: 4</li>
+            <li>Seating Capacity: 5</li>
+            <li>One Large Bag + Two Small Bags</li>
+            <li>Efficiency: 24-30 MPGe</li>
+            <li>Daily rate: $29/day</li>
+            <li>Weekly rate: $199/week</li>
+            <li>Monthly rate: $549/month</li>
+          </ul>
+          <span class = "close-popup" onclick = "closeCarPopup (event)">Close</span>
+        </div>
+
+        <div id = "car-popup-prius" class = "car-popup">
+          <h1>2010 Toyota Prius</h1>
+          <ul style = "background-color: white;">
+            <li>Doors: 4</li>
+            <li>Seating Capacity: 5</li>  
+            <li>One Large Bag + Two Small Bags</li>
+            <li>Efficiency: 48-50 MPGe</li>
+            <li>Daily rate: $49/day</li>
+            <li>Weekly rate: $299/week</li>
+            <li>Monthly rate: $799/month</li>
+          </ul>
+          <span class = "close-popup" onclick = "closeCarPopup (event)">Close</span>
+        </div>
+
+        <h3>Standard SUVs</h3>
+        <p style = "text-align: left; font-size: 15px;">For those seeking a bit more space and versatility, our Standard SUVs are a fantastic choice. These vehicles offer a higher seating position, ample cargo room, and all-wheel drive capabilities, making them great for family trips or adventures in various terrains.</p>
+        <div class = "fleet-cars">
+          <img class = "car" id = "countryman" src = "img/car/countrym.png" alt = "MINI Countryman" data-popup = "car-popup-countryman" onclick = "showCarPopup (event)">
+          <img class = "car" id = "durango" src = "img/car/durango.png" alt = "Dodge Durango" data-popup = "car-popup-durango" onclick = "showCarPopup (event)">
+          <img class = "car" id = "edge" src = "img/car/edge.png" alt = "Ford Edge" data-popup = "car-popup-edge" onclick = "showCarPopup (event)">
+          <img class = "car" id = "suburban" src = "img/car/suburban.png" alt = "Chevrolet Suburban" data-popup = "car-popup-suburban" onclick = "showCarPopup (event)">
+        </div>
+
+        <div id = "car-popup-countryman" class = "car-popup">
+          <h1>2018 MINI Countryman</h1>
+          <ul style = "background-color: white;">
+            <li>Doors: 4</li>
+            <li>Seating Capacity: 5</li>  
+            <li>One Large Bag + Two Small Bags</li>
+            <li>Efficiency: 25-29 MPGe</li>
+            <li>Daily rate: $49/day</li>
+            <li>Weekly rate: $259/week</li>
+            <li>Monthly rate: $799/month</li>
+          </ul>
+          <span class = "close-popup" onclick = "closeCarPopup (event)">Close</span>
+        </div>
+
+        <div id = "car-popup-durango" class = "car-popup">
+          <h1>2010 Dodge Durango</h1>
+          <ul style = "background-color: white;">
+            <li>Doors: 4</li>
+            <li>Seating Capacity: 5</li>    
+            <li>Three Large Bags + Two Small Bags</li>
+            <li>Efficiency: 18-21 MPGe</li>
+            <li>Daily rate: $59/day</li>
+            <li>Weekly rate: $329/week</li>
+            <li>Monthly rate: $1099/month</li>
+          </ul>
+          <span class = "close-popup" onclick = "closeCarPopup (event)">Close</span>
+        </div>
+
+        <div id = "car-popup-edge" class = "car-popup">
+          <h1>2011 Ford Edge</h1>
+          <ul style = "background-color: white;">
+            <li>Doors: 4</li>
+            <li>Seating Capacity: 5</li>
+            <li>Two Large Bags + Two Small Bags</li>
+            <li>Efficiency: 20-23 MPGe</li>
+            <li>Daily rate: $59/day</li>
+            <li>Weekly rate: $399/week</li>
+            <li>Monthly rate: $1299/month</li>
+          </ul>
+          <span class = "close-popup" onclick = "closeCarPopup (event)">Close</span>
+        </div>
+
+        <div id = "car-popup-suburban" class = "car-popup">
+          <h1>2019 Chevrolet Suburban</h1>
+          <ul style = "background-color: white;">
+            <li>Doors: 4</li>
+            <li>Seating Capacity: 8<li>
+            <li>Three Large Bags + Three Small Bags</li>
+            <li>Efficiency: 14-17 MPGe</li>
+            <li>Daily rate: $89/day</li>
+            <li>Weekly rate: $519/week</li>
+            <li>Monthly rate: $1699/month</li>
+          </ul>
+          <span class = "close-popup" onclick = "closeCarPopup (event)">Close</span>
+        </div>
+
+        <h3>Premium Sedans</h3>
+        <p style = "text-align: left; font-size: 15px;">Our Premium Sedans are tailored for travelers looking for a touch of luxury. These vehicles boast top-notch features, including leather interiors, advanced technology, and enhanced performance, ensuring a stylish and comfortable ride for business or leisure.</p>
+        <div class = "fleet-cars">
+          <img class = "car" id = "320t" src = "img/car/320t.png" alt = "BMW 320i Touring" data-popup = "car-popup-320t" onclick = "showCarPopup (event)">
+          <img class = "car" id = "a3" src = "img/car/a3.png" alt = "Audi A3" data-popup = "car-popup-a3" onclick = "showCarPopup (event)">
+          <img class = "car" id = "models" src = "img/car/models.png" alt = "Tesla Model S" data-popup = "car-popup-models" onclick = "showCarPopup (event)">
+          <img class = "car" id = "taycan" src = "img/car/taycan.png" alt = "Porsche Taycan" data-popup = "car-popup-taycan" onclick = "showCarPopup (event)">
+        </div>
+
+        <div id = "car-popup-320t" class = "car-popup">
+          <h1>2021 BMW 320i Touring</h1>
+          <ul style = "background-color: white;">
+            <li>Doors: 4</li>
+            <li>Seating Capacity: 5</li>
+            <li>Four Large Bags + One Small Bag<li>
+            <li>Efficiency: 28-35 MPGe</li>
+            <li>Daily rate: $129/day</li>
+            <li>Weekly rate: $749/week</li>
+            <li>Monthly rate: $2499/month</li>
+          </ul>
+          <span class = "close-popup" onclick = "closeCarPopup (event)">Close</span>
+        </div>
+
+        <div id = "car-popup-a3" class = "car-popup">
+          <h1>2020 Audi A3</h1>
+          <ul style = "background-color: white;">
+            <li>Doors: 4</li>
+            <li>Seating Capacity: 5</li>
+            <li>Two Large Bags + One Small Bag<li>
+            <li>Efficiency: 29-36 MPGe</li>
+            <li>Daily rate: $109/day</li>
+            <li>Weekly rate: $699/week</li>
+            <li>Monthly rate: $2299/month</li>
+          </ul>
+          <span class = "close-popup" onclick = "closeCarPopup (event)">Close</span>
+        </div>
+
+        <div id = "car-popup-models" class = "car-popup">
+          <h1>2015 Tesla Model S</h1>
+          <ul style = "background-color: white;">
+            <li>Doors: 4</li>
+            <li>Seating Capacity: 5</li>
+            <li>Two Large Bags + Two Small Bags</li>
+            <li>Efficiency: 100-120 MPGe</li>
+            <li>Daily rate: $899/day</li>
+            <li>Weekly rate: $5399/week</li>
+            <li>Monthly rate: $17999/month</li>
+          </ul>
+          <span class = "close-popup" onclick = "closeCarPopup (event)">Close</span>
+        </div>
+
+        <div id = "car-popup-taycan" class = "car-popup">
+          <h1>2019 Porsche Taycan</h1>
+          <ul style = "background-color: white;">
+            <li>Doors: 4</li>
+            <li>Seating Capacity: 5</li>
+            <li>Two Large Bags + One Small Bag<li>
+            <li>Efficiency: 70-80 MPGe</li>
+            <li>Daily rate: $1099/day</li>
+            <li>Weekly rate: $6599/week</li>
+            <li>Monthly rate: $22999/month</li>
+          </ul>
+          <span class = "close-popup" onclick = "closeCarPopup (event)">Close</span>
+        </div>
+
+        <h3>Premium SUVs</h3>
+        <p style = "text-align: left; font-size: 15px;">If you desire both luxury and versatility, our Premium SUVs are an excellent pick. These spacious, high-end SUVs combine the comfort of premium sedans with the practicality of SUVs, making them perfect for upscale road trips and group outings.</p>
+        <div class = "fleet-cars">
+          <img class = "car" id = "macan" src = "img/car/macan.png" alt = "Porsche Macan" data-popup = "car-popup-macan" onclick = "showCarPopup (event)">
+          <img class = "car" id = "rangerover" src = "img/car/rangerov.png" alt = "Land Rover Range Rover" data-popup = "car-popup-rangerover" onclick = "showCarPopup (event)">
+          <img class = "car" id = "urus" src = "img/car/urus.png" alt = "Lamborghini Urus Performante" data-popup = "car-popup-urus" onclick = "showCarPopup (event)">
+          <img class = "car" id = "x5m" src = "img/car/x5.png" alt = "BMW X5 M" data-popup = "car-popup-x5m" onclick = "showCarPopup (event)">
+        </div>
+
+        <div id = "car-popup-macan" class = "car-popup">
+          <h1>2019 Porsche Macan</h1>
+          <ul style = "background-color: white;">
+            <li>Doors: 4</li>
+            <li>Seating Capacity: 5</li>
+            <li>Two Large Bags + Two Small Bags</li>
+            <li>Efficiency: 20-25 MPGe</li>
+            <li>Daily rate: $189/day</li>
+            <li>Weekly rate: $1149/week</li>
+            <li>Monthly rate: $3799/month</li>
+          </ul>
+          <span class = "close-popup" onclick = "closeCarPopup (event)">Close</span>
+        </div>
+
+        <div id = "car-popup-rangerover" class = "car-popup">
+          <h1>2018 Land Rover Range Rover</h1>
+          <ul style = "background-color: white;">
+            <li>Doors: 4</li>
+            <li>Seating Capacity: 7<li>
+            <li>Three Large Bags + Two Small Bags</li>
+            <li>Efficiency: 13-17 MPGe</li>
+            <li>Daily rate: $299/day</li>
+            <li>Weekly rate: $1799/week</li>
+            <li>Monthly rate: $5999/month</li>
+          </ul>
+          <span class = "close-popup" onclick = "closeCarPopup (event)">Close</span>
+        </div>
+
+        <div id = "car-popup-urus" class = "car-popup">
+          <h1>2023 Lamborghini Urus Performante</h1>
+          <ul style = "background-color: white;">
+            <li>Doors: 4</li>
+            <li>Seating Capacity: 5</li>
+            <li>Two Large Bags + Two Small Bags</li>
+            <li>Efficiency: 12-16 MPGe</li>
+            <li>Daily rate: $2499/day</li>
+            <li>Weekly rate: $14999/week</li>
+            <li>Monthly rate: $49999/month</li>
+          </ul>
+          <span class = "close-popup" onclick = "closeCarPopup (event)">Close</span>
+        </div>
+
+        <div id = "car-popup-x5m" class = "car-popup">
+          <h1>2018 BMW X5 M</h1>
+          <ul style = "background-color: white;">
+            <li>Doors: 4</li>
+            <li>Seating Capacity: 5</li>
+            <li>Three Large Bags + Two Small Bags</li>
+            <li>Efficiency: 17-23 MPGe</li>
+            <li>Daily rate: $279/day</li>
+            <li>Weekly rate: $1649/week</li>
+            <li>Monthly rate: $5499/month</li>
+          </ul>
+          <span class = "close-popup" onclick = "closeCarPopup (event)">Close</span>
+        </div>
+
+        <h3>Performance</h3>
+        <p style = "text-align: left; font-size: 15px;">Our Performance category is designed for driving enthusiasts. These cars are all about power and agility, with high-performance engines and sporty handling. Whether you're a fan of spirited drives or want to experience the thrill of speed, these vehicles deliver an adrenaline-pumping experience.</p>
+        <div class = "fleet-cars">
+          <img class = "car" id = "camaro" src = "img/car/camaro.png" alt = "Chevrolet Camaro" data-popup = "car-popup-camaro" onclick = "showCarPopup (event)">
+          <img class = "car" id = "charger" src = "img/car/charger.png" alt = "Dodge Charger SRT" data-popup = "car-popup-charger" onclick = "showCarPopup (event)">
+          <img class = "car" id = "supra" src = "img/car/supra.png" alt = "Toyota Supra" data-popup = "car-popup-supra" onclick = "showCarPopup (event)">
+          <img class = "car" id = "rcf" src = "img/car/rcf.png" alt = "Lexus RC F" data-popup = "car-popup-rcf" onclick = "showCarPopup (event)">
+        </div>
+
+        <div id = "car-popup-camaro" class = "car-popup">
+          <h1>2019 Chevrolet Camaro</h1>
+          <ul style = "background-color: white;">
+            <li>Doors: 2</li>
+            <li>Seating Capacity: 2</li>
+            <li>Two Large Bags + One Small Bag<li>
+            <li>Efficiency: 16-22 MPGe</li>
+            <li>Daily rate: $189/day</li>
+            <li>Weekly rate: $1149/week</li>
+            <li>Monthly rate: $3799/month</li>
+          </ul>
+          <span class = "close-popup" onclick = "closeCarPopup (event)">Close</span>
+        </div>
+
+        <div id = "car-popup-charger" class = "car-popup">
+          <h1>2019 Dodge Charger SRT</h1>
+          <ul style = "background-color: white;">
+            <li>Doors: 4</li>
+            <li>Seating Capacity: 5</li>
+            <li>Two Large Bags + Two Small Bags</li>
+            <li>Efficiency: 14-17 MPGe</li>
+            <li>Daily rate: $199/day</li>
+            <li>Weekly rate: $1199/week</li>
+            <li>Monthly rate: $3999/month</li>
+          </ul>
+          <span class = "close-popup" onclick = "closeCarPopup (event)">Close</span>
+        </div>
+
+        <div id = "car-popup-supra" class = "car-popup">
+          <h1>2020 Toyota GR Supra</h1>
+          <ul style = "background-color: white;">
+            <li>Doors: 2</li>
+            <li>Seating Capacity: 2</li>
+            <li>One Large Bag + One Small Bag<li>
+            <li>Efficiency: 22-28 MPGe</li>
+            <li>Daily rate: $189/day</li>
+            <li>Weekly rate: $1149/week</li>
+            <li>Monthly rate: $3799/month</li>
+          </ul>
+          <span class = "close-popup" onclick = "closeCarPopup (event)">Close</span>
+        </div>
+
+        <div id = "car-popup-rcf" class = "car-popup">
+          <h1>2019 Lexus RC F</h1>
+          <ul style = "background-color: white;">
+            <li>Doors: 2</li>
+            <li>Seating Capacity: 2</li>
+            <li>Two Large Bags + Two Small Bags</li>
+            <li>Efficiency: 16-22 MPGe</li>
+            <li>Daily rate: $229/day</li>
+            <li>Weekly rate: $1349/week</li>
+            <li>Monthly rate: $4499/month</li>
+          </ul>
+          <span class = "close-popup" onclick = "closeCarPopup (event)">Close</span>
+        </div>
+
+        <h3>High Performance</h3>
+        <p style = "text-align: left; font-size: 15px;">For the ultimate in automotive excitement, our High Performance category is where you'll find top-tier supercars and exotics. These vehicles are the epitome of engineering excellence, offering breathtaking acceleration, cutting-edge technology, and head-turning design that will satisfy even the most demanding automotive connoisseurs.</p>
+        <div class = "fleet-cars">
+          <img class = "car" id = "911c" src = "img/car/911c.png" alt = "Porsche 911 Carrera S" data-popup = "car-popup-911c" onclick = "showCarPopup (event)">
+          <img class = "car" id = "911cab" src = "img/car/911cab.png" alt = "Porsche 911 Carrera S cabriolet" data-popup = "car-popup-911cab" onclick = "showCarPopup (event)">
+          <img class = "car" id = "corvette" src = "img/car/corvette.png" alt = "Chevrolet C8 Corvette" data-popup = "car-popup-corvette" onclick = "showCarPopup (event)">
+          <img class = "car" id = "r8" src = "img/car/r8.png" alt = "Audi R8" data-popup = "car-popup-r8" onclick = "showCarPopup (event)">
+        </div>
+
+        <div id = "car-popup-911c" class = "car-popup">
+          <h1>2019 Porsche 911 Carrera S</h1>
+          <ul style = "background-color: white;">
+            <li>Doors: 2</li>
+            <li>Seating Capacity: 2</li>
+            <li>One Small Bag<li>
+            <li>Efficiency: 21-25 MPGe</li>
+            <li>Daily rate: $1199/day</li>
+            <li>Weekly rate: $7199/week</li>
+            <li>Monthly rate: $23999/month</li>
+          </ul>
+          <span class = "close-popup" onclick = "closeCarPopup (event)">Close</span>
+        </div>
+
+        <div id = "car-popup-911cab" class = "car-popup">
+          <h1>2019 Porsche Carrera S Cabriolet</h1>
+          <ul style = "background-color: white;">
+            <li>Doors: 2</li>
+            <li>Seating Capacity: 2</li>
+            <li>One Small Bag<li>
+            <li>Efficiency: 21-25 MPGe</li>
+            <li>Daily rate: $1299/day</li>
+            <li>Weekly rate: $7799/week</li>
+            <li>Monthly rate: $25999/month</li>
+          </ul>
+          <span class = "close-popup" onclick = "closeCarPopup (event)">Close</span>
+        </div>
+
+        <div id = "car-popup-corvette" class = "car-popup">
+          <h1>2020 Chevrolet Corvette</h1>
+          <ul style = "background-color: white;">
+            <li>Doors: 2</li>
+            <li>Seating Capacity: 2</li>
+            <li>One Small Bag<li>
+            <li>Efficiency: 16-20 MPGe</li>
+            <li>Daily rate: $999/day</li>
+            <li>Weekly rate: $5999/week</li>
+            <li>Monthly rate: $19999/month</li>
+          </ul>
+          <span class = "close-popup" onclick = "closeCarPopup (event)">Close</span>
+        </div>
+
+        <div id = "car-popup-r8" class = "car-popup">
+          <h1>2018 Audi R8</h1>
+          <ul style = "background-color: white;">
+            <li>Doors: 2</li>
+            <li>Seating Capacity: 2</li>
+            <li>Two Small Bags</li>
+            <li>Efficiency: 16-20 MPGe</li>
+            <li>Daily rate: $1799/day</li>
+            <li>Weekly rate: $10799/week</li>
+            <li>Monthly rate: $35999/month</li>
+          </ul>
+          <span class = "close-popup" onclick = "closeCarPopup (event)">Close</span>
+        </div>
+    </div>
+    
+    <p style = "text-align: left;">Whether you're looking for practicality, luxury, or sheer excitement, AZoom Car Rentals has a diverse range of vehicle categories to meet your travel needs and preferences.</p>
+
+    <footer>
+      <p>&copy; 2023 AZoom Car Rentals</p>
+    </footer>
+
+    <script>
+      function showCarPopup (event)
+      { 
+        //hides all existing popups
+        var popups = document.querySelectorAll ('.car-popup');
+        for (var i = 0; i < popups.length; i++)
+        {
+          popups[i].style.display = 'none';
+        }
+
+        var popupId = event.target.getAttribute ('data-popup');
+        var popupElement = document.getElementById (popupId);
+        popupElement.style.display = 'block';
+      }
+
+      function closeCarPopup (event)
+      {
+        var popupElement = event.target.closest ('.car-popup');
+        popupElement.style.display = 'none';
+      }
+
+      //upon page load, checks if user is logged in and display welcome message + logout button if they are
+      document.addEventListener ('DOMContentLoaded', function ()
+      {
+        //check if user is logged in, and set initial state
+        var loggedIn = localStorage.getItem ('loggedIn');
+        var userRole = localStorage.getItem ('userRole');
+
+        if (loggedIn === 'true')
+        {
+          if (userRole === 'customer')
+          {
+            //show "booking.html" and "history.html" link for customers
+            document.querySelector ('a[href = "booking.html"]').style.display = 'block';
+            document.querySelector ('a[href = "history.html"]').style.display = 'block';
+          }
+          
+          else if (userRole === 'employee')
+          {
+            //show "records.html" link for employees
+            document.querySelector ('a[href = "records.html"]').style.display = 'block';
+          }
+
+          //hide login link and show welcome message and logout button
+          var loginLink = document.getElementById ('loginLink');
+          var welcomeMessage = document.getElementById ('welcomeMessage');
+          var logoutButton = document.getElementById ('logoutButton');
+
+          if (loginLink) loginLink.style.display = 'none';
+          if (welcomeMessage)
+          {
+            welcomeMessage.style.display = 'block';
+            welcomeMessage.textContent = 'Welcome ' + localStorage.getItem ('username');
+          }
+
+          if (logoutButton) logoutButton.style.display = 'block';
+        }
+      });
+
+      //logs user out and clears the data from local storage
+      function confirmLogout ()
+      {
+        var confirmLogout = window.confirm ('Are you sure you want to log out?');
+        if (confirmLogout)
+        {
+          //remove user information from local storage
+          localStorage.removeItem ('loggedIn');
+          localStorage.removeItem ('username');
+          localStorage.removeItem ('userRole')
+
+          var loginLink = document.getElementById ('loginLink');
+          var welcomeMessage = document.getElementById ('welcomeMessage');
+          var logoutButton = document.getElementById ('logoutButton');
+          var bookingPage = document.querySelector ('a[href = "booking.html"]');
+          var historyPage = document.querySelector ('a[href = "history.html"]');
+          var recordsPage = document.querySelector ('a[href = "records.html"]');
+
+          if (loginLink) loginLink.style.display = 'block';
+          if (welcomeMessage) welcomeMessage.style.display = 'none';
+          if (logoutButton) logoutButton.style.display = 'none';
+          if (bookingPage) bookingPage.style.display = 'none';
+          if (historyPage) historyPage.style.display = 'none';
+          if (recordsPage) recordsPage.style.display = 'none';
+        }
+
+        // Redirect the user to home.html
+        window.location.href = 'home.html';
+      }
+      
+    </script>
+
+  </body>
+
+</html>

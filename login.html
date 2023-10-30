@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel = "stylesheet" href = "login.css">
+    <title>Login | AZoom Car Rentals</title>
+  </head>
+
+  <body>
+    <ul class = "navbar">
+      <li><a href = "home.html">Home</a></li>
+      <li><a href = "fleet.html">Fleet</a></li>
+      <li><a href = "contact.html">Contact</a></li>
+      <li><a href = "about.html">About</a></li>
+      <li><a style = "display: none;" href = "booking.html">Make a Booking</a></li>
+      <li><a style = "display: none;" href = "history.html">Booking History</a></li>
+      <li><a style = "display: none;" href = "records.html">Booking Records</a></li>
+      <li class = "right"><a class = "active" id = "loginPage" href = "#login">Login</a></li>
+      <li class = "right"><a id = "logoutButton" style = "display: none;" href = "#" onclick = "confirmLogout ();">Logout</a></li>
+      <li class = "right"><a id = "welcomeMessage" style = "display: none;"></a></li>
+  </ul>
+    
+    <div class = "companyLogo">
+      <img src = "img/logo.png" height = "100px" style = "float: left;">
+      <h1 style = "text-align: center;">Log in with your AZoom details!</h1>
+    </div>
+
+    <div class = "login-form" id = "loginForm">
+      <form>
+        <h1>Login</h1>
+        <div class = "content">
+          <div class = "input-field">
+            <h4>Username</h4>
+            <input type = "text" id = "username" autocomplete = "nope">
+          </div>
+          <div class = "input-field">
+            <h4>Password</h4>
+            <input type = "password" id = "password" autocomplete = "new-password">
+          </div>
+          <div class = "radio-group">
+            <label>
+              <input type = "radio" name = "user-type" value = "customer" checked> Customer
+            </label>
+            <label>
+              <input type = "radio" name = "user-type" value = "employee"> Employee
+            </label>
+          </div>
+          <a href = "#" class = "link" id = "forgotPassword">Forgot Your Password?</a>
+        </div>
+        <div class = "action">
+          <button type = "button" onclick = "toggleRegistrationForm ()">Register</button>
+          <button type = "button" onclick = "validateLogin ()">Sign in</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="registration-form" id = "registrationForm" style = "display: none;">
+      <form>
+        <h1>Register</h1>
+        <div class = "content">
+          <div class = "input-field">
+            <label>Full Name</label>
+            <input type = "text" id = "fullname" oninput = "onlyAlphabets (this)" required>
+          </div>
+          <div class = "input-field">
+            <label>Date of Birth</label>
+            <input type = "date" id = "dob" required>
+          </div>
+          <div class="input-field">
+            <label>Nationality</label>
+            <input type = "text" id = "nationality" oninput = "onlyAlphabets (this)" required>
+          </div>
+          <div class="input-field">
+            <label>Email</label>
+            <input type="email" id = "email" required>
+          </div>
+          <div class="input-field">
+            <label>Driving License Number</label>
+            <input type="text" id = "license" required>
+          </div>
+        </div>
+        <div class = "action">
+          <button type = "button" onclick = "goBack ()">Back</button>
+          <button type = "button" onclick = "validateRegistration ()">Register</button>
+        </div>
+      </form>
+    </div>
+    
+    <!-- Password Reset Popup -->
+    <div id = "password-reset-popup" class = "popup">
+      <div class = "popup-content">
+        <span class = "close" onclick = "closePopup ()">&times;</span>
+        <h2>Forgot Password</h2>
+        <p>Enter your email address to reset your password:</p>
+        <input type = "email" id = "reset-email" placeholder = "Email">
+        <button onclick = "sendPasswordResetEmail ()">Reset Password</button>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2023 AZoom Car Rentals</p>
+    </footer>
+
+    <script>
+      function validateLogin ()
+      {
+        // Get the input values
+        var username = document.getElementById ('username').value;
+        var password = document.getElementById ('password').value;
+        var userType = document.querySelector ('input[name = "user-type"]:checked').value;
+
+        if ((userType === 'employee' && username === 'emp123' && password === '123') || 
+        (userType === 'customer' && username === 'cust123' && password === '123'))
+        {
+          // Successful login
+          localStorage.setItem ('loggedIn', 'true');
+          localStorage.setItem ('username', username);
+          alert ('Login successful');
+          showWelcomeMessage (username);
+          toggleLoginForm (false);
+          toggleLogoutLink (true);
+
+          // Redirect the user to home.html
+          window.location.href = 'home.html';
+
+        }
+        
+        else
+        {
+          // Failed login
+          alert ('Login failed. Please check your credentials and user type.');
+        }
+
+        // In the validateLogin function of login.html
+        if (userType === 'employee')
+        {
+          localStorage.setItem ('userRole', 'employee');
+        }
+        
+        else if (userType === 'customer')
+        {
+          localStorage.setItem ('userRole', 'customer');
+        }
+
+      }
+
+      function showWelcomeMessage (username)
+      {
+        var welcomeMessage = document.createElement ('li');
+        welcomeMessage.innerHTML = 'Welcome ' + username;
+        welcomeMessage.id = 'welcomeMessage'; // Set a unique ID
+        var logoutButton = document.getElementById ('logoutButton');
+        welcomeMessage.style.float = 'right';
+        document.querySelector ('ul').appendChild (welcomeMessage);
+        logoutButton.style.display = 'block';
+        logoutButton.addEventListener ('click', confirmLogout);
+      }
+
+      function toggleLoginForm (show)
+      {
+        var loginForm = document.getElementById ('loginForm');
+        if (show)
+        {
+          loginForm.style.display = 'block';
+        }
+        
+        else
+        {
+          loginForm.style.display = 'none';
+        }
+      }
+
+      function toggleLogoutLink (show)
+      {
+        var loginLink = document.getElementById ('loginPage');
+        var logoutLink = document.getElementById ('logoutButton');
+        if (show)
+        {
+          loginLink.style.display = 'none';
+          logoutLink.style.display = 'block';
+        }
+
+        else
+        {
+          loginLink.style.display = 'block';
+          logoutLink.style.display = 'none';
+        }
+      }
+
+      function toggleRegistrationForm ()
+      {
+        var userType = document.querySelector ('input[name = "user-type"]:checked').value;
+        var registrationForm = document.getElementById ('registrationForm');
+        var loginForm = document.getElementById ('loginForm');
+
+        if (userType === 'employee')
+        {
+          alert ('Employees cannot register.');
+        }
+
+        else
+        {
+          if (registrationForm.style.display === 'none')
+          {
+            registrationForm.style.display = 'block';
+            loginForm.style.display = 'none';
+          }
+          
+          else
+          {
+            registrationForm.style.display = 'none';
+            loginForm.style.display = 'block';
+          }
+        }
+      }
+
+      function validateRegistration ()
+      {
+        var fullName = document.getElementById ('fullname').value;
+        var dob = new Date(document.getElementById ('dob').value);
+        var email = document.getElementById ('email').value;
+        var license = document.getElementById ('license').value;
+
+        if (!/^[A-Za-z\s]+$/.test (fullName))
+        {
+          alert ('Full Name can only contain letters and spaces.');
+          return false;
+        }
+
+        var currentDate = new Date ();
+        var ageCheck = new Date ();
+        ageCheck.setFullYear (ageCheck.getFullYear () - 18);
+
+        if (dob > ageCheck)
+        {
+          alert('You must be 18 years or older to register.');
+          return false;
+        }
+
+        if (!isValidEmail (email))
+        {
+          alert ('Invalid email format.');
+          return false;
+        }
+
+        alert ('Registration successful!\nA confirmation email will be sent to your email.');
+        window.location.href = 'login.html';
+      }
+
+      function goBack ()
+      {
+        var registrationForm = document.getElementById ('registrationForm');
+        var loginForm = document.getElementById ('loginForm');
+
+        // Hide the registration form and show the login form
+        registrationForm.style.display = 'none';
+        loginForm.style.display = 'block';
+      }
+
+      function isValidEmail(email)
+      {
+        var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+        return emailRegex.test (email);
+      }
+
+      function onlyAlphabets (input)
+      {
+          // Remove numeric and special characters
+          var value = input.value.replace (/[^a-zA-Z\s]/g, '');
+          input.value = value;
+      }
+
+      function confirmLogout ()
+      {
+        var confirmLogout = window.confirm ('Are you sure you want to log out?');
+        if (confirmLogout)
+        {
+          toggleLoginForm (true);
+          toggleLogoutLink (false);
+          var welcomeMessage = document.getElementById ('welcomeMessage'); // Use the unique ID
+          if (welcomeMessage)
+          {
+            welcomeMessage.remove ();
+          }
+        }
+
+        // Redirect the user to home.html
+        window.location.href = 'home.html';
+      }
+
+      function openPopup ()
+      {
+        var popup = document.getElementById ('password-reset-popup');
+        popup.style.display = 'block';
+      }
+
+      function closePopup ()
+      {
+        var popup = document.getElementById ('password-reset-popup');
+        popup.style.display = 'none';
+      }
+
+      function sendPasswordResetEmail ()
+      {
+        var email = document.getElementById ('reset-email').value;
+        // You can implement the logic to send the password reset instructions here
+        alert ('Password reset instructions will be sent to ' + email);
+        closePopup ();
+      }
+
+      document.getElementById ('forgotPassword').addEventListener ('click', openPopup);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel = "stylesheet" href = "about.css">
+    <title>About Us | AZoom Car Rentals</title>
+  </head>
+
+  <body>
+    <ul class="navbar">
+      <li><a href = "home.html">Home</a></li>
+      <li><a href = "fleet.html">Fleet</a></li>
+      <li><a href = "contact.html">Contact</a></li>
+      <li><a class = "active" href = "#about">About</a></li>
+      <li><a style = "display: none;" href = "booking.html">Make a Booking</a></li>
+      <li><a style = "display: none;" href = "history.html">Booking History</a></li>
+      <li><a style = "display: none;" href = "records.html">Booking Records</a></li>
+      <li class = "right"><a id = "loginLink" href = "login.html">Login</a></li>
+      <li class = "right"><a id = "logoutButton" style = "display: none;" href = "#" onclick = "confirmLogout ();">Logout</a></li>
+      <li class = "right"><a id = "welcomeMessage" style = "display: none;"></a></li>
+  </ul>
+
+    <div class = "companyLogo">
+      <img src = "img/logo.png" height = "100px" style = "float: left;">
+    <h1 style = "text-align: center;">About AZoom</h1>
+    </div>
+
+    <section class = "aboutus">
+      <h3>Our History</h3>
+      <div class = "history">
+        <h4>2020 - A Vision for Sustainable Mobility</h4>
+        <p style = "text-align: left;">In the year 2020, our journey began with a vision for a greener, more sustainable future for urban transportation in Singapore. We recognized the growing need for eco-friendly alternatives to traditional cars and saw the potential of electric vehicles (EVs) to transform the way people move around the city.</p>
+
+        <h4>2021 - Inaugural Fleet Launch</h4>
+        <p style = "text-align: left;">In early 2021, we took our first significant step by introducing our inaugural fleet of electric vehicles to the Singaporean market. With a modest fleet of electric cars, we provided a pioneering option for residents and visitors to experience the thrill of emission-free driving.</p>
+
+        <h4>2022 - Rapid Expansion and Innovation</h4>
+        <p style = "text-align: left;">The year 2022 marked a period of rapid growth and innovation for our company. We expanded our fleet to offer a diverse selection of electric vehicles, from compact city cars to luxurious electric SUVs, catering to various preferences and needs. Our charging infrastructure also expanded, making it easier for our customers to recharge and enjoy the convenience of electric mobility.</p>
+
+        <h4>2023 - Pioneering Sustainable Mobility Solutions</h4>
+        <p style = "text-align: left;">By 2023, we had firmly established ourselves as a leader in the Singaporean EV rental industry. We introduced innovative subscription plans and corporate partnerships to encourage more businesses and individuals to adopt eco-friendly transportation solutions. Our commitment to sustainability went beyond just EVs, with initiatives like carbon offset programs, which showcased our dedication to minimizing our ecological footprint.</p>
+
+        <h4>Present - Building a Greener Future Together</h4>
+        <p style = "text-align: left;">Today, we continue to evolve, improve, and expand our services to meet the growing demand for electric vehicle rentals. We're proud to be a part of Singapore's journey towards a greener future, where cleaner air and sustainable transportation are not just a dream but a reality. We are grateful for the trust and support of our customers, partners, and the entire community, and we are excited about the journey ahead.</p>
+
+        <h4>The Future - Driving Forward with You</h4>
+        <p style = "text-align: left;">As we look to the future, we remain committed to our mission of making electric mobility accessible, convenient, and sustainable for all. We're dedicated to expanding our fleet, introducing cutting-edge technology, and collaborating with the community to build a more eco-conscious and connected Singapore. With your continued support, together, we can drive towards a cleaner, brighter future.</p>
+        <p style = "text-align: left;">Thank you for being a part of our journey.</p>
+      </div>
+    </section>
+
+    <section class = "locations">
+      <h3>Locations</h3>
+      <div class = "locations">
+        <p style = "text-align: left;">Whether you are coming into Singapore from Changi Airport or from Malaysia at the 2 checkpoints, we have these locations covered.</p>
+        <p style = "text-align: left;">We have 4 offices conveniently located in the west, north, central and at Changi Airport, so wherever you are coming from, we have the pick up and drop off locations at convenient locations.</p>
+      </div>
+    </section>
+
+
+    <footer>
+      <p>&copy; 2023 AZoom Car Rentals</p>
+    </footer>
+
+    <script>
+      //upon page load, checks if user is logged in and display welcome message + logout button if they are
+      document.addEventListener ('DOMContentLoaded', function ()
+      {
+        //check if user is logged in, and set initial state
+        var loggedIn = localStorage.getItem ('loggedIn');
+        var userRole = localStorage.getItem ('userRole');
+
+        if (loggedIn === 'true')
+        {
+          if (userRole === 'customer')
+          {
+            //show "booking.html" and "history.html" link for customers
+            document.querySelector ('a[href = "booking.html"]').style.display = 'block';
+            document.querySelector ('a[href = "history.html"]').style.display = 'block';
+          }
+          
+          else if (userRole === 'employee')
+          {
+            //show "records.html" link for employees
+            document.querySelector ('a[href = "records.html"]').style.display = 'block';
+          }
+
+          //hide login link and show welcome message and logout button
+          var loginLink = document.getElementById ('loginLink');
+          var welcomeMessage = document.getElementById ('welcomeMessage');
+          var logoutButton = document.getElementById ('logoutButton');
+
+          if (loginLink) loginLink.style.display = 'none';
+          if (welcomeMessage)
+          {
+            welcomeMessage.style.display = 'block';
+            welcomeMessage.textContent = 'Welcome ' + localStorage.getItem ('username');
+          }
+
+          if (logoutButton) logoutButton.style.display = 'block';
+        }
+      });
+
+      //logs user out and clears the data from local storage
+      function confirmLogout ()
+      {
+        var confirmLogout = window.confirm ('Are you sure you want to log out?');
+        if (confirmLogout)
+        {
+          //remove user information from local storage
+          localStorage.removeItem ('loggedIn');
+          localStorage.removeItem ('username');
+          localStorage.removeItem ('userRole')
+
+          var loginLink = document.getElementById ('loginLink');
+          var welcomeMessage = document.getElementById ('welcomeMessage');
+          var logoutButton = document.getElementById ('logoutButton');
+          var bookingPage = document.querySelector ('a[href = "booking.html"]');
+          var historyPage = document.querySelector ('a[href = "history.html"]');
+          var recordsPage = document.querySelector ('a[href = "records.html"]');
+
+          if (loginLink) loginLink.style.display = 'block';
+          if (welcomeMessage) welcomeMessage.style.display = 'none';
+          if (logoutButton) logoutButton.style.display = 'none';
+          if (bookingPage) bookingPage.style.display = 'none';
+          if (historyPage) historyPage.style.display = 'none';
+          if (recordsPage) recordsPage.style.display = 'none';
+        }
+
+        // Redirect the user to home.html
+        window.location.href = 'home.html';
+      }
+    </script>
+
+  </body>
+
+</html>

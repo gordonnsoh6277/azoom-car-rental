@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel = "stylesheet" href = "history.css">
+    <title>Your Booking History | AZoom Car Rentals</title>
+  </head>
+
+  <body>
+    <ul class = "navbar">
+      <li><a href = "home.html">Home</a></li>
+      <li><a href = "fleet.html">Fleet</a></li>
+      <li><a href = "contact.html">Contact</a></li>
+      <li><a href = "about.html">About</a></li>
+      <li><a style = "display: none;" href = "booking.html">Make a Booking</a></li>
+      <li><a class = "active" href = "history.html">Booking History</a></li>
+      <li><a style = "display: none;" href = "records.html">Booking Records</a></li>
+      <li class = "right"><a id = "loginLink" href = "login.html">Login</a></li>
+      <li class = "right"><a id = "logoutButton" style = "display: none;" href = "#" onclick = "confirmLogout ();">Logout</a></li>
+      <li class = "right"><a id = "welcomeMessage" style = "display: none;"></a></li>
+    </ul>
+
+    <div class = "companyLogo">
+        <img src = "img/logo.png" height = "100px" style = "float: left;">
+    <h1 style = "text-align: center;">Past Booking Records</h1>
+    </div>
+
+    <!-- "Needs Attention" message -->
+    <div id = "attentionMessage" style = "text-align: center; font-weight: bold"></div>
+
+    <table>
+      <tr>
+        <th>Booking ID</th>
+        <th>Vehicle</th>
+        <th>Vehicle Plate</th>
+        <th>Booking Date</th>
+        <th>Return Date</th>
+        <th>Status</th>
+      </tr>
+      <tr>
+        <td>00001</td>
+        <td>Toyota Camry</td>
+        <td>SNA5622B</td>
+        <td>01-10-2023</td>
+        <td>08-10-2023</td>
+        <td>Clear</td>
+      </tr>
+      <tr class = "needs-attention">
+        <td>00005</td>
+        <td>Porsche Macan</td>
+        <td>SGQ2323H</td>
+        <td>15-10-2023</td>
+        <td>30-10-2023</td>
+        <td>Needs Attention</td>
+      </tr>
+    </table>
+
+     <!-- Popup for displaying damage and charges -->
+     <div class = "popup" id = "damagePopup">
+      <div class = "popup-content">
+          <span class = "close-button" onclick = "closePopup ('damagePopup')">&times;</span>
+          <h2>Damage Details</h2>
+          <p id = "damageDetails">Loading damage details...</p>
+          <button class = "pay-button" onclick = "showPaymentDialog ()">Pay for Damage</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Custom modal dialog for payment confirmation -->
+    <div class = "custom-modal" id = "paymentConfirmationModal">
+      <div class = "custom-modal-content">
+        <h2>Payment Confirmation</h2>
+        <p>Would you like to pay with your existing card?</p>
+        <button class = "no-button" onclick = "redirectToPaymentPage ()">No</button>
+        <button class = "yes-button" onclick = "processPayment ()">Yes</button>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2023 AZoom Car Rentals</p>
+    </footer>
+
+    <script>
+      // Dictionary of damage details for each booking ID
+      var damageData =
+      {
+        "00005": "Minor scratch on the left side. Charges: $50.",
+        //"00006": "Dent on the front bumper. Charges: $100."
+      };
+
+      //count number of rows with "Needs Attention" status and update the message
+      function updateAttentionMessage ()
+      {
+        var table = document.querySelector ("table");
+        var rows = table.querySelectorAll ("tr");
+        var needsAttentionCount = 0;
+
+        //loops through rows (skip the header row)
+        for (var i = 1; i < rows.length; i++)
+        {
+          //6 is the index of the Status column
+          var statusCell = rows[i].querySelector ("td:nth-child(6)");
+          if (statusCell.textContent.trim () === "Needs Attention")
+          {
+            needsAttentionCount++;
+            // Add a CSS class to the row that needs attention
+            rows[i].classList.add("needs-attention");
+          }
+        }
+
+        //updates message element with styled text
+        var attentionMessage = document.getElementById ("attentionMessage");
+
+        //if there are transactions that need attention, style the number in red
+        if (needsAttentionCount > 0)
+        {
+          attentionMessage.innerHTML = 'You have <span style="color: red;">'
+            + needsAttentionCount + '</span> transactions that need attention';
+        }
+        
+        // if there are no transactions that need attention, display a normal message
+        else
+        {
+          attentionMessage.textContent = 'You have 0 transactions that need attention.';
+        }
+      }
+
+      //shows popup with damage details
+      function showPopup (bookingID)
+      {
+        var popup = document.getElementById ('damagePopup');
+        var damageDetails = document.getElementById ('damageDetails');
+        var payButton = document.querySelector ('.pay-button');
+        
+        if (damageData.hasOwnProperty (bookingID))
+        {
+          damageDetails.textContent = damageData[bookingID];
+          payButton.style.display = 'block';
+        }
+        
+        else
+        {
+          damageDetails.textContent = "No damage details available.";
+        }
+
+        popup.style.display = 'block';
+      }
+
+      //closes popup
+      function closePopup (popupId)
+      {
+        var popup = document.getElementById (popupId);
+        popup.style.display = 'none';
+      }
+
+      //show payment confirmation modal dialog
+      function showPaymentDialog ()
+      {
+        var modal = document.getElementById ('paymentConfirmationModal');
+        modal.style.display = 'block';
+      }
+
+      //process payment
+      function processPayment ()
+      {
+        alert ('Payment successful.');
+        closePopup ('damagePopup');
+        closePaymentModal ();
+        updateRowAndMessage ();
+      }
+
+      //redirects user to payment.html
+      function redirectToPaymentPage ()
+      {
+        window.location.href = 'payment.html';
+        closePaymentModal ();
+      }
+
+      //closes payment confirmation modal dialog
+      function closePaymentModal ()
+      {
+        var modal = document.getElementById ('paymentConfirmationModal');
+        modal.style.display = 'none';
+      }
+
+      //event delegation to handle clicks on rows with "Needs Attention"
+      document.querySelector ("table").addEventListener ("click", function (event)
+      {
+        if (event.target.parentElement.classList.contains ("needs-attention"))
+        {
+          var bookingID = event.target.parentElement.children[0].textContent;
+          showPopup (bookingID);
+        }
+      });
+
+      //upon page load, checks if user is logged in and display welcome message + logout button if they are
+      document.addEventListener ('DOMContentLoaded', function ()
+      {
+        //check if user is logged in, and set initial state
+        var loggedIn = localStorage.getItem ('loggedIn');
+        var userRole = localStorage.getItem ('userRole');
+
+        if (loggedIn === 'true')
+        {
+          if (userRole === 'customer')
+          {
+            //show "booking.html" and "history.html" link for customers
+            document.querySelector ('a[href = "booking.html"]').style.display = 'block';
+            document.querySelector ('a[href = "history.html"]').style.display = 'block';
+          }
+          
+          else if (userRole === 'employee')
+          {
+            //show "records.html" link for employees
+            document.querySelector ('a[href = "records.html"]').style.display = 'block';
+          }
+
+          //hide login link and show welcome message and logout button
+          var loginLink = document.getElementById ('loginLink');
+          var welcomeMessage = document.getElementById ('welcomeMessage');
+          var logoutButton = document.getElementById ('logoutButton');
+
+          if (loginLink) loginLink.style.display = 'none';
+          if (welcomeMessage)
+          {
+            welcomeMessage.style.display = 'block';
+            welcomeMessage.textContent = 'Welcome ' + localStorage.getItem ('username');
+          }
+
+          if (logoutButton) logoutButton.style.display = 'block';
+        }
+
+        //calls method to update attention message
+        updateAttentionMessage();
+      });     
+
+      //logs user out and clears the data from local storage
+      function confirmLogout ()
+      {
+        var confirmLogout = window.confirm ('Are you sure you want to log out?');
+        if (confirmLogout)
+        {
+          //remove user information from local storage
+          localStorage.removeItem ('loggedIn');
+          localStorage.removeItem ('username');
+          localStorage.removeItem ('userRole')
+
+          var loginLink = document.getElementById ('loginLink');
+          var welcomeMessage = document.getElementById ('welcomeMessage');
+          var logoutButton = document.getElementById ('logoutButton');
+          var bookingPage = document.querySelector ('a[href = "booking.html"]');
+          var historyPage = document.querySelector ('a[href = "history.html"]');
+          var recordsPage = document.querySelector ('a[href = "records.html"]');
+
+          if (loginLink) loginLink.style.display = 'block';
+          if (welcomeMessage) welcomeMessage.style.display = 'none';
+          if (logoutButton) logoutButton.style.display = 'none';
+          if (bookingPage) bookingPage.style.display = 'none';
+          if (historyPage) historyPage.style.display = 'none';
+          if (recordsPage) recordsPage.style.display = 'none';
+        }
+
+        // Redirect the user to home.html
+        window.location.href = 'home.html';
+      }
+    </script>
+
+  </body>
+
+</html>

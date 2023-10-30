@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel = "stylesheet" href = "payment.css">
+    <title>Payment | AZoom Car Rentals</title>
+</head>
+
+<body>
+    <ul class = "navbar">
+        <li><a href = "home.html">Home</a></li>
+        <li><a href = "fleet.html">Fleet</a></li>
+        <li><a href = "contact.html">Contact</a></li>
+        <li><a href = "about.html">About</a></li>
+        <li><a href = "booking.html">Make a Booking</a></li>
+        <li><a style = "display: none;" href = "history.html">Booking History</a></li>
+        <li><a style = "display: none;" href = "records.html">Booking Records</a></li>
+        <li class = "right"><a id = "loginLink" href = "login.html">Login</a></li>
+        <li class = "right"><a id = "logoutButton" style = "display: none;" href = "#" onclick = "confirmLogout ();">Logout</a></li>
+        <li class = "right"><a id = "welcomeMessage" style = "display: none;"></a></li>
+    </ul>
+
+    <div class = "companyLogo">
+        <img src = "img/logo.png" height = "100px" style = "float: left;">
+        <h1 style = "text-align: center;">Make a Payment</h1>
+    </div>
+
+    <div id = "paymentForm">
+        <h2>Enter your card details</h2>
+        <form onsubmit = "showSuccessPopup (); return false;">
+            <div class = "input-group">
+                <label for = "cardName">Name On Card:</label>
+                <input type = "text" id = "cardName" name = "cardName" oninput = "formatCardName (this)" required>
+            </div>
+            <div class = "input-group">
+                <label for = "cardNumber">Card Number:</label>
+                <input type = "text" id = "cardNumber" name = "cardNumber" oninput = "formatCardNumber (this)" maxlength = "19" required inputmode = "numeric">
+            </div>
+            <div class = "input-group">
+                <label for = "expiryDate">Expiry Date:</label>
+                <input type = "text" id = "expiryDate" name = "expiryDate" oninput = "formatExpiryDate (this)" required inputmode = "numeric">
+            </div>
+            <div class = "input-group">
+                <label for = "cvv">CVV:</label>
+                <input type = "text" id = "cvv" name = "cvv" oninput = "formatCVV (this)" max = "9999" required inputmode = "numeric">
+            </div>
+            <div class = "button-container">
+                <button type = "submit">Submit Payment</button>
+                <button type = "cancel" onclick = "cancelTransaction ();">Cancel Transaction</button>
+            </div>
+        </form>
+    </div>
+
+    <div id = "successPopup" class = "popup" style = "display: none;">
+    <span class = "close" onclick = "closeSuccessPopup ()">&times;</span>
+        <p>Payment was successful!</p>
+        <p>Your transaction details will be sent to your email.</p>
+        <p>Redirecting you back to our home page...</p>
+    </div>    
+
+    <footer>
+        <p>&copy; 2023 AZoom Car Rentals</p>
+    </footer>
+
+    <script>
+        function showSuccessPopup ()
+        {
+            // Display the success popup
+            var successPopup = document.getElementById ("successPopup");
+            if (successPopup)
+            {
+                successPopup.style.display = "block";
+                // Set a timer to auto-close and redirect after 3 seconds
+                setTimeout (function () {closeSuccessPopup ();}, 3000);
+            }
+        }
+
+        function closeSuccessPopup ()
+        {
+            // Hide the success popup
+            var successPopup = document.getElementById ("successPopup");
+            if (successPopup)
+            {
+                successPopup.style.display = "none";
+                // Redirect to home.html
+                window.location.href = "home.html";
+            }
+        }
+
+        function formatExpiryDate (input)
+        {
+            // Remove non-numeric characters
+            var value = input.value.replace (/\D/g, '');
+            
+            // Add a slash after the 2nd number
+            if (value.length > 2)
+            {
+                value = value.slice (0, 2) + '/' + value.slice (2);
+            }
+            
+            // Limit to 5 characters (MM/YY)
+            input.value = value.slice (0, 5);
+        }
+
+        function formatCVV (input)
+        {
+            // Remove non-numeric characters
+            var value = input.value.replace (/\D/g, '');
+            input.value = value;
+        }
+
+        function formatCardName (input)
+        {
+            // Remove numeric and special characters
+            var value = input.value.replace (/[^a-zA-Z\s]/g, '');
+            input.value = value;
+        }
+
+        function formatCardNumber (input)
+        {
+            // Remove non-numeric characters
+            var value = input.value.replace (/\D/g, '');
+            
+            // Insert a space after every 4 digits
+            value = value.replace (/ (\d{4}) (?=\d)/g, '$1 ');
+            
+            input.value = value;
+        }
+     
+        function cancelTransaction ()
+        {
+            var cancelConfirmation = window.confirm ('Are you sure you want to cancel the transaction and go back to the home page?\nAny unsaved booking information will be lost.');
+            if (cancelConfirmation)
+            {
+                // Remove booking information from local storage
+                localStorage.removeItem ('bookingInfo');
+                // Redirect to home.html
+                window.location.href = 'home.html';
+            }
+        }
+
+      //upon page load, checks if user is logged in and display welcome message + logout button if they are
+      document.addEventListener ('DOMContentLoaded', function ()
+      {
+        //check if user is logged in, and set initial state
+        var loggedIn = localStorage.getItem ('loggedIn');
+        var userRole = localStorage.getItem ('userRole');
+
+        if (loggedIn === 'true')
+        {
+          if (userRole === 'customer')
+          {
+            //show "booking.html" and "history.html" link for customers
+            document.querySelector ('a[href = "booking.html"]').style.display = 'block';
+            document.querySelector ('a[href = "history.html"]').style.display = 'block';
+          }
+          
+          else if (userRole === 'employee')
+          {
+            //show "records.html" link for employees
+            document.querySelector ('a[href = "records.html"]').style.display = 'block';
+          }
+
+          //hide login link and show welcome message and logout button
+          var loginLink = document.getElementById ('loginLink');
+          var welcomeMessage = document.getElementById ('welcomeMessage');
+          var logoutButton = document.getElementById ('logoutButton');
+
+          if (loginLink) loginLink.style.display = 'none';
+          if (welcomeMessage)
+          {
+            welcomeMessage.style.display = 'block';
+            welcomeMessage.textContent = 'Welcome ' + localStorage.getItem ('username');
+          }
+
+          if (logoutButton) logoutButton.style.display = 'block';
+        }
+      });
+
+      //logs user out and clears the data from local storage
+      function confirmLogout ()
+      {
+        var confirmLogout = window.confirm ('Are you sure you want to log out?');
+        if (confirmLogout)
+        {
+          //remove user information from local storage
+          localStorage.removeItem ('loggedIn');
+          localStorage.removeItem ('username');
+          localStorage.removeItem ('userRole')
+
+          var loginLink = document.getElementById ('loginLink');
+          var welcomeMessage = document.getElementById ('welcomeMessage');
+          var logoutButton = document.getElementById ('logoutButton');
+          var bookingPage = document.querySelector ('a[href = "booking.html"]');
+          var historyPage = document.querySelector ('a[href = "history.html"]');
+          var recordsPage = document.querySelector ('a[href = "records.html"]');
+
+          if (loginLink) loginLink.style.display = 'block';
+          if (welcomeMessage) welcomeMessage.style.display = 'none';
+          if (logoutButton) logoutButton.style.display = 'none';
+          if (bookingPage) bookingPage.style.display = 'none';
+          if (historyPage) historyPage.style.display = 'none';
+          if (recordsPage) recordsPage.style.display = 'none';
+        }
+
+        // Redirect the user to home.html
+        window.location.href = 'home.html';
+      }
+    </script>
+</body>
+
+</html>

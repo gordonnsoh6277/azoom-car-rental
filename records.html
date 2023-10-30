@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel = "stylesheet" href = "records.css">
+    <title>Booking Records | AZoom Car Rentals</title>
+  </head>
+
+  <body>
+    <ul class = "navbar">
+      <li><a href = "home.html">Home</a></li>
+      <li><a href = "fleet.html">Fleet</a></li>
+      <li><a href = "contact.html">Contact</a></li>
+      <li><a href = "about.html">About</a></li>
+      <li><a style = "display: none;" href = "booking.html">Make a Booking</a></li>
+      <li><a style = "display: none;" href = "history.html">Booking History</a></li>
+      <li><a class = "active" href = "#records">Booking Records</a></li>
+      <li class = "right"><a id = "loginLink" href = "login.html">Login</a></li>
+      <li class = "right"><a id = "logoutButton" style = "display: none;" href = "#" onclick = "confirmLogout ();">Logout</a></li>
+      <li class = "right"><a id = "welcomeMessage" style = "display: none;"></a></li>
+    </ul>
+
+    <div class = "companyLogo">
+        <img src = "img/logo.png" height = "100px" style = "float: left;">
+    <h1 style = "text-align: center;">Past Booking Records</h1>
+    </div>
+
+    <table>
+      <tr>
+        <th>Booking ID</th>
+        <th>Customer Name</th>
+        <th>Vehicle</th>
+        <th>Vehicle Plate</th>
+        <th>Booking Date</th>
+        <th>Return Date</th>
+        <th>Condition</th>
+        <th>Last Updated By</th>
+      </tr>
+      <tr>
+        <td>00001</td>
+        <td>John Doe</td>
+        <td>Toyota Camry</td>
+        <td>SNA5622B</td>
+        <td>01-10-2023</td>
+        <td>08-10-2023</td>
+        <td><input type = "text" id = "condition_1" value = "Good"></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>00002</td>
+        <td>Jane Smith</td>
+        <td>MINI Countryman</td>
+        <td>SFW6355U</td>
+        <td>01-10-2023</td>
+        <td>09-10-2023</td>
+        <td><input type = "text" id = "condition_2" value = "Excellent"></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>00003</td>
+        <td>Michael Johnson</td>
+        <td>Mitsubishi Lancer</td>
+        <td>SLP2374G</td>
+        <td>03-10-2023</td>
+        <td>10-10-2023</td>
+        <td><input type="text" id = "condition_3" value = "Fair"></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>00004</td>
+        <td>Susan Williams</td>
+        <td>BMW 320i Touring</td>
+        <td>SNM8460R</td>
+        <td>06-10-2023</td>
+        <td>15-10-2023</td>
+        <td><input type = "text" id = "condition_4" value = "Excellent"></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>00005</td>
+        <td>John Doe</td>
+        <td>Porsche Macan</td>
+        <td>SGQ2323H</td>
+        <td>15-10-2023</td>
+        <td>30-10-2023</td>
+        <td><input type = "text" id = "condition_5" value = "Good"></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>00006</td>
+        <td>Lisa Davis</td>
+        <td>Dodge Charger SRT</td>
+        <td>SMP9466S</td>
+        <td>15-10-2023</td>
+        <td>25-10-2023</td>
+        <td><input type = "text" id = "condition_6" value = "Fair"></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>00007</td>
+        <td>William Wilson</td>
+        <td>Toyota GR Supra</td>
+        <td>SDX6311P</td>
+        <td>16-10-2023</td>
+        <td>24-100-2023</td>
+        <td><input type = "text" id = "condition_7" value = "Good"></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>00008</td>
+        <td>Emily Lee</td>
+        <td>Porsche 911 Carrera S</td>
+        <td>SJH911K</td>
+        <td>19-10-2023</td>
+        <td>25-10-2023</td>
+        <td><input type = "text" id = "condition_8" value = "Excellent"></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>00009</td>
+        <td>James Taylor</td>
+        <td>Chevrolet Suburban</td>
+        <td>SNG3267A</td>
+        <td>19-10-2023</td>
+        <td>29-10-2023</td>
+        <td><input type = "text" id = "condition_9" value = "Good"></td>
+        <td></td>
+      </tr>
+    </table>
+
+    <button onclick = "submitConditions ()">Submit Conditions</button>
+    <p id = "successMessage" style = "display: none; color: green;">Conditions updated successfully.</p>
+
+    <footer>
+      <p>&copy; 2023 AZoom Car Rentals</p>
+    </footer>
+
+    <script>
+
+      function submitConditions ()
+      {
+        //retrieve user name from localStorage
+        var username = localStorage.getItem ('username');
+
+        // Get all rows in the table except the header row
+        var table = document.querySelector ('table');
+        var rows = table.querySelectorAll ('tr:not(:first-child)');
+
+        // Loop through each row to update the "last updated by" column with the user name
+        rows.forEach(function (row)
+        {
+          var cells = row.cells;
+          var lastCell = cells [cells.length - 1];
+          
+          if (lastCell)
+          {
+            lastCell.textContent = username;
+          }
+        });
+
+         // Display success message on the webpage
+         var successMessage = document.getElementById ('successMessage');
+         if (successMessage) successMessage.style.display = 'block';
+        
+      }
+
+      //upon page load, checks if user is logged in and display welcome message + logout button if they are
+      document.addEventListener ('DOMContentLoaded', function ()
+      {
+        //check if user is logged in, and set initial state
+        var loggedIn = localStorage.getItem ('loggedIn');
+        var userRole = localStorage.getItem ('userRole');
+
+        if (loggedIn === 'true')
+        {
+          if (userRole === 'customer')
+          {
+            //show "booking.html" and "history.html" link for customers
+            document.querySelector ('a[href = "booking.html"]').style.display = 'block';
+            document.querySelector ('a[href = "history.html"]').style.display = 'block';
+          }
+          
+          else if (userRole === 'employee')
+          {
+            //show "records.html" link for employees
+            //document.querySelector ('a[href = "records.html"]').style.display = 'block';
+          }
+
+          //hide login link and show welcome message and logout button
+          var loginLink = document.getElementById ('loginLink');
+          var welcomeMessage = document.getElementById ('welcomeMessage');
+          var logoutButton = document.getElementById ('logoutButton');
+
+          if (loginLink) loginLink.style.display = 'none';
+          if (welcomeMessage)
+          {
+            welcomeMessage.style.display = 'block';
+            welcomeMessage.textContent = 'Welcome ' + localStorage.getItem ('username');
+          }
+
+          if (logoutButton) logoutButton.style.display = 'block';
+        }
+      });
+
+      //logs user out and clears the data from local storage
+      function confirmLogout ()
+      {
+        var confirmLogout = window.confirm ('Are you sure you want to log out?');
+        if (confirmLogout)
+        {
+          //remove user information from local storage
+          localStorage.removeItem ('loggedIn');
+          localStorage.removeItem ('username');
+          localStorage.removeItem ('userRole')
+
+          var loginLink = document.getElementById ('loginLink');
+          var welcomeMessage = document.getElementById ('welcomeMessage');
+          var logoutButton = document.getElementById ('logoutButton');
+          var bookingPage = document.querySelector ('a[href = "booking.html"]');
+          var historyPage = document.querySelector ('a[href = "history.html"]');
+          var recordsPage = document.querySelector ('a[href = "records.html"]');
+
+          if (loginLink) loginLink.style.display = 'block';
+          if (welcomeMessage) welcomeMessage.style.display = 'none';
+          if (logoutButton) logoutButton.style.display = 'none';
+          if (bookingPage) bookingPage.style.display = 'none';
+          if (historyPage) historyPage.style.display = 'none';
+          if (recordsPage) recordsPage.style.display = 'none';
+        }
+
+        // Redirect the user to home.html
+        window.location.href = 'home.html';
+      }
+    </script>
+
+  </body>
+
+</html>

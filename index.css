@@ -12,7 +12,7 @@ ul.navbar
   padding: 0;
   overflow: hidden;
   background-color: #333;
-  position: fixed; /* Add this line to make the navbar fixed */
+  position: fixed;
   width: 100%;
 }
 
@@ -77,26 +77,51 @@ colour-text
   margin: 0 auto;
 }
 
-/* CSS for testimonials section */
-.testimonials.text-box
+/* CTA section */
+.cta
 {
-  background-color: transparent;
-  padding: 20px;
-  margin: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba (0, 0, 0, 0.1);
-  max-width: 1000px; /* This controls the maximum width for testimonials */
-  margin: 0 auto;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 40px;
 }
 
-/* CSS for unique-selling-points section */
-.unique-selling-points.text-box
+.cta h2
+{
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.cta p
+{
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.cta-button
+{
+  display: inline-block;
+  background-color: red;
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 18px;
+  transition: background-color 0.3s;
+}
+
+.cta-button:hover
+{
+  background-color: darkred;
+}
+
+.testimonials.text-box, .unique-selling-points.text-box
 {
   background-color: transparent;
   padding: 20px;
   margin: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba (0, 0, 0, 0.1);
-  max-width: 500px; /* This controls the maximum width for unique-selling-points */
+  max-width: 1000px;
   margin: 0 auto;
 }

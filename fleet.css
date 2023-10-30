@@ -77,6 +77,44 @@ colour-text
   margin: 0 auto;
 }
 
+/* CTA section */
+.cta
+{
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 40px;
+}
+
+.cta h2
+{
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.cta p
+{
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.cta-button
+{
+  display: inline-block;
+  background-color: red;
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 18px;
+  transition: background-color 0.3s;
+}
+
+.cta-button:hover
+{
+  background-color: darkred;
+}
+
 div.fleet-cars
 {
   background-color: transparent;

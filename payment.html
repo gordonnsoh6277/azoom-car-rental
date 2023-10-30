@@ -65,64 +65,64 @@
     <script>
         function showSuccessPopup ()
         {
-            // Display the success popup
+            //display success popup
             var successPopup = document.getElementById ("successPopup");
             if (successPopup)
             {
                 successPopup.style.display = "block";
-                // Set a timer to auto-close and redirect after 3 seconds
+                //set a timer to auto-close and redirect after 3 seconds
                 setTimeout (function () {closeSuccessPopup ();}, 3000);
             }
         }
 
         function closeSuccessPopup ()
         {
-            // Hide the success popup
+            //hide the success popup
             var successPopup = document.getElementById ("successPopup");
             if (successPopup)
             {
                 successPopup.style.display = "none";
-                // Redirect to index.html
+                //redirect to index.html
                 window.location.href = "index.html";
             }
         }
 
         function formatExpiryDate (input)
         {
-            // Remove non-numeric characters
+            //remove non-numeric characters
             var value = input.value.replace (/\D/g, '');
             
-            // Add a slash after the 2nd number
+            //add a slash after the 2nd number
             if (value.length > 2)
             {
                 value = value.slice (0, 2) + '/' + value.slice (2);
             }
             
-            // Limit to 5 characters (MM/YY)
+            //limit to 5 characters (MM/YY)
             input.value = value.slice (0, 5);
         }
 
         function formatCVV (input)
         {
-            // Remove non-numeric characters
+            //remove non-numeric characters
             var value = input.value.replace (/\D/g, '');
             input.value = value;
         }
 
         function formatCardName (input)
         {
-            // Remove numeric and special characters
+            //remove numeric and special characters
             var value = input.value.replace (/[^a-zA-Z\s]/g, '');
             input.value = value;
         }
 
         function formatCardNumber (input)
         {
-            // Remove non-numeric characters
+            //remove non-numeric characters
             var value = input.value.replace (/\D/g, '');
             
-            // Insert a space after every 4 digits
-            value = value.replace (/ (\d{4}) (?=\d)/g, '$1 ');
+            //insert a space after every 4 digits
+            value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
             
             input.value = value;
         }
@@ -132,9 +132,9 @@
             var cancelConfirmation = window.confirm ('Are you sure you want to cancel the transaction and go back to the home page?\nAny unsaved booking information will be lost.');
             if (cancelConfirmation)
             {
-                // Remove booking information from local storage
+                //remove booking information from local storage
                 localStorage.removeItem ('bookingInfo');
-                // Redirect to index.html
+                //redirect to index.html
                 window.location.href = 'index.html';
             }
         }

@@ -82,6 +82,38 @@ colour-text
   box-sizing: border-box;
 }
 
+.contactform
+{
+  border-radius: 5px;
+  background-color: transparent;
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto; /* Center the form horizontally */
+}
+
+.center
+{
+  margin: 0 auto;
+  text-align: center;
+}
+
+.left-align-label
+{
+  text-align: left;
+  display: block;
+}
+
+.left-align-radio
+{
+  margin-right: 8px;
+}
+
+.radio-option
+{
+  display: flex;
+  align-items: center;
+}
+
 input[type=text], select, textarea
 {
   width: 100%;
@@ -107,11 +139,4 @@ input[type=submit]
 input[type=submit]:hover
 {
   background-color: #726ABC;
-}
-
-.contactform
-{
-  border-radius: 5px;
-  background-color: transparent;
-  padding: 20px;
 }

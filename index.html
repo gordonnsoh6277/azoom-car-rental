@@ -64,6 +64,13 @@
       </ul>
     </section>
 
+    <div class = "cta">
+      <h2>Ready to Rent a Car?</h2>
+      <p>Explore our fleet and book your car today!</p>
+      <p>Log in or Register and start your smooth and comfortable EV experience!</p>
+      <a class = "cta-button" href = "javascript:void(0);" onclick = "redirectToBookingOrLogin ();">Book Now</a>
+    </div>
+    
     <footer>
       <p>&copy; 2023 AZoom Car Rentals</p>
     </footer>
@@ -107,6 +114,31 @@
         }
       });
 
+      // redirects user to login or booking if they are logged in or not
+      function redirectToBookingOrLogin ()
+      {
+        var loggedIn = localStorage.getItem ('loggedIn');
+        var userRole = localStorage.getItem ('userRole');
+
+        if (loggedIn === 'true')
+        {
+          if (userRole === 'customer')
+          {
+            window.location.href = 'booking.html';
+          }
+          
+          else
+          {
+            alert ('Employees cannot make bookings.');
+          }
+        }
+        
+        else
+        {
+          window.location.href = 'login.html';
+        }
+      }
+
       //logs user out and clears the data from local storage
       function confirmLogout ()
       {
@@ -133,8 +165,8 @@
           if (recordsPage) recordsPage.style.display = 'none';
         }
 
-        // Redirect the user to home.html
-        window.location.href = 'home.html';
+        // Redirect the user to index.html
+        window.location.href = 'index.html';
       }
     </script>
 
